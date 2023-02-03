@@ -12,6 +12,8 @@ class BaseModel(models.Model):
 class RegistrationModel(BaseModel):
     email = models.EmailField()
     password_confirmation = models.CharField(validators=[MinLengthValidator(11)], max_length=32)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
 
 def __str__(self):
     return self.username
