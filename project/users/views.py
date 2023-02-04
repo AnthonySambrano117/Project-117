@@ -101,4 +101,7 @@ def base(request):
     #     form:'forms'
     # }
     return render(request, "users/base.html")
+
+def budget(request):
+    return render(request,'users/budget.html')
     

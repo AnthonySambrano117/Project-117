@@ -19,6 +19,19 @@ class RegistrationForm(BaseForm):
 #         model=RegistrationModel
 #         fields=['username', 'password', 'email']
 #         # exlude=['username']
+class MonthlyExpenseForm(forms.Form):
+    amount_cars=forms.IntegerField()
+    rent_bill=forms.IntegerField()
+    mortgage_bill=forms.IntegerField()
+    mortgage_interest_rate=forms.IntegerField()
+    gorcerys=forms.IntegerField()
+    dinning_out=forms.IntegerField()
+    gas=forms.IntegerField()
+    internet=forms.IntegerField()
+    phone_bill=forms.IntegerField()
+    utilites=forms.IntegerField()
+    miscellaneous=forms.IntegerField()
+
 
 
 

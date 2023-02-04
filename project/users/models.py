@@ -14,6 +14,38 @@ class RegistrationModel(BaseModel):
     password_confirmation = models.CharField(validators=[MinLengthValidator(11)], max_length=32)
     # user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
+class MonthlyExpenseModel(models.Model):
+    amount_cars=models.IntegerField()
+    rent_bill=models.IntegerField()
+    mortgage_bill=models.IntegerField()
+    mortgage_interest_rate=models.IntegerField()
+    gorcerys=models.IntegerField()
+    dinning_out=models.IntegerField()
+    gas=models.IntegerField()
+    internet=models.IntegerField()
+    phone_bill=models.IntegerField()
+    utilites=models.IntegerField()
+    miscellaneous=models.IntegerField()
+
+class Assents(models.Model):
+    income=models.IntegerField()
+    savings_amount=models.IntegerField()
+    savings_interest_rate=models.IntegerField()
+    amount_in_stocks=models.IntegerField()
+    yes_no_401K=models.CharField(max_length=3)
+    interest_401K_match=models.IntegerField()
+    roth_investing=models.IntegerField()
+    roth_amount=models.IntegerField()
+    pass_miscellaneous=models.IntegerField()
+
+
+class BudgetReview(models.Model):
+    Total_Monthly_Savings=models.IntegerField()
+    Total_Monthly_Expenses=models.IntegerField()
+    Under_Over_Budget=models.IntegerField()
+
+
+
 
 def __str__(self):
     return self.username
