@@ -26,6 +26,7 @@ class MonthlyExpenseModel(models.Model):
     phone_bill=models.IntegerField()
     utilites=models.IntegerField()
     miscellaneous=models.IntegerField()
+    user = models.ForeignKey(BaseModel, on_delete=models.CASCADE)
 
 class Assents(models.Model):
     income=models.IntegerField()
@@ -37,12 +38,14 @@ class Assents(models.Model):
     roth_investing=models.IntegerField()
     roth_amount=models.IntegerField()
     pass_miscellaneous=models.IntegerField()
+    user = models.ForeignKey(BaseModel, on_delete=models.CASCADE)
 
 
 class BudgetReview(models.Model):
     Total_Monthly_Savings=models.IntegerField()
     Total_Monthly_Expenses=models.IntegerField()
     Under_Over_Budget=models.IntegerField()
+    user = models.ForeignKey(BaseModel, on_delete=models.CASCADE)
 
 
 

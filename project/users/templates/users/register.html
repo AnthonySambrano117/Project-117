@@ -4,10 +4,10 @@
 
 {% block content  %}
 <h3>Register</h3>
-<form method="POST" action="">
+<form method="POST" action="{% url 'register' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" name="Create User">
+    <input type="submit" value="Creat Account" name="">
 </form>
 {% endblock content  %}
 

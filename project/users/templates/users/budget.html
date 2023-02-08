@@ -2,5 +2,28 @@
 <main>
     {% block content %}
     <p>Budget Page</p>
+    <form method="POST" action="{% url 'budget' %}">
+        <H3>Your Income</H3>
+        {% csrf_token %}
+        {{ incomeform.as_p }}
+        <input type="submit" value="Make Budget" name="">
+
+
+    <form method="POST" action="{% url 'budget' %}">
+        <H3>Your Monthly Expense</H3>
+        {% csrf_token %}
+        {{ forms.as_p }}
+        <input type="submit" value="Make Budget" name="">
+    </form>
+
+    <form method="POST" action="{% url 'budget' %}">
+        <H3>Your Budget Review</H3>
+        {% csrf_token %}
+        {{ BudgetOut.as_p }}
+        <input type="submit" value="Make Budget" name="">
+    </form>
+    
+
+
     {% endblock content %}
 </main>

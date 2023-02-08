@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, authenticate
-from .forms import RegistrationForm, BaseForm as LoginForm
+from .forms import RegistrationForm, MonthlyExpenseForm, AssentsForm, BudgetReviewForm, BaseForm as LoginForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
 from django.contrib.auth.models import User
@@ -36,6 +36,7 @@ def login(request):
                 user_login(request, user)
                 # If the user was trying to access a page before logging in
                 # then redirect them to that page
+                return redirect('profile')
                 previous_page = request.GET.get('next')
                 # If previous_page is not None then redirect to that page
                 if previous_page is not None:
@@ -78,7 +79,7 @@ def registerPage(request):
             # use .set_password() instead to store the hashed password to the db
             user.set_password(password)
             user.save()
-            return redirect('profile')
+            return redirect('login')
 
     return render(request, 'users/register.html', context)
 
@@ -89,12 +90,13 @@ def profile(request):
     # posts = BlogPost.objects.filter(
     #     user=request.user).order_by('-created_date')
     # Put all posts into context
-    context = {
-        # "posts": posts
-        'forms':form
-    }
+    # context = {
+    #     # "posts": posts
+    #     'forms':form
+    # }
     # Pass context into template
-    return render(request, 'users/profile.html', context)
+    print(request)
+    return render(request, 'users/profile.html')
 
 def base(request):
     # context= {
@@ -103,5 +105,27 @@ def base(request):
     return render(request, "users/base.html")
 
 def budget(request):
-    return render(request,'users/budget.html')
+    form=MonthlyExpenseForm(request.POST)
+    incomeform = AssentsForm(request.POST)
+    BudgetReview=BudgetReviewForm(request.POST)
+    context={
+        'forms':form,
+        'incomeform': incomeform,
+        'BudgetOut': BudgetReview
+
+    }
+
+    #   if request.method == "GET":
+    #     form = RegistrationForm
+    # else:
+    #     # Create a form instance and populate it with data from the request:
+    #     form = RegistrationForm(request.POST)
+    #     # Check if the form is valid:
+    #     if form.is_valid():
+    #         # Process the data in form.cleaned_data as required
+    #         username = form.cleaned_data['username']
+    #         email = form.cleaned_data['email']
+    #         password = form.cleaned_data['password']  # password123
+    #         password_confirmation = form.cleaned_data['password_confirmation']
+    return render(request,'users/budget.html', context)
     

@@ -7,24 +7,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            {% comment %} {% if request.user.is_anonymous %} {% endcomment %}
+            {% if request.user.is_anonymous %}
             <li class="nav-item">
             <a class="nav-link active link-light color" aria-current="page" href="{% url 'register' %}">Register</h1></a>
             </li>
             <li class="nav-item">
             <a class="nav-link active link-light color" aria-current="page" href="{% url 'login' %}">Login</h1></a>
             </li>
-            {% comment %} {% else %} {% endcomment %}
+            {% else %}
             <li class="nav-item">
               <a class="nav-link link-light color" href="{% url 'budget' %}">Budget</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link link-light" href="{% url 'profile' %}">User Profile</a>
+            <a class="nav-link link-light color" href="{% url 'profile' %}">{{ request.user.username }} Profile</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link link-light color" href="#contact">Sign Out</a>
+            <a class="nav-link link-light color" href="{% url 'logout' %}">Log Out</a>
             </li>
-            {% comment %} {% endif %} {% endcomment %}
+            {% endif %}
         </ul>
         </div>
     </div>
