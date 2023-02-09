@@ -104,17 +104,49 @@ def base(request):
     # }
     return render(request, "users/base.html")
 
+
+def expencesTotal(request):
+    BlogPost.objects.filter(
+        user=request.user)
+
+# def expences(request):
+#     if ammount_cars>=(expencesTotal*.1):
+#         print('Your car payment is to high. Your car payment should be 10% percent of you budget')
+#         else: "You car payment is within budget"
+
+#     if gas>=(expenceTotal*.1):
+#         print('Your car payment is to high. Your car payment should be no more then 10% percent of you budget')
+
+#     if rent>=(expencesTotal*.3)
+#         print("Your rent is expense is high. Most advisers recommended 30% or lower of your income should go to housing")
+    
+# amount_cars=models.IntegerField()
+#     rent_bill=models.IntegerField()
+#     mortgage_bill=models.IntegerField()
+#     mortgage_interest_rate=models.IntegerField()
+#     gorcerys=models.IntegerField()
+#     dinning_out=models.IntegerField()
+#     gas=models.IntegerField()
+#     internet=models.IntegerField()
+#     phone_bill=models.IntegerField()
+#     utilites=models.IntegerField()
+#     miscellaneous=models.IntegerField()
+#     user = models.ForeignKey(BaseModel, on_delete=models.CASCADE)
+
+
+
+
 def budget(request):
-    form=MonthlyExpenseForm(request.POST)
-    incomeform = AssentsForm(request.POST)
-    BudgetReview=BudgetReviewForm(request.POST)
+    form=MonthlyExpenseForm()
+    incomeform = AssentsForm()
+    BudgetReview=BudgetReviewForm()
     context={
-        'forms':form,
+        # 'forms':form,
         'incomeform': incomeform,
-        'BudgetOut': BudgetReview
+        # 'BudgetOut': BudgetReview
 
     }
-
+    print(context)
     #   if request.method == "GET":
     #     form = RegistrationForm
     # else:
