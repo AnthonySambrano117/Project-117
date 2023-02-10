@@ -32,7 +32,7 @@ class MonthlyExpenseForm(forms.Form):
     utilites=forms.IntegerField()
     miscellaneous=forms.IntegerField()
 
-class AssentsForm(forms.Form):
+class AssetsForm(forms.Form):
     income=forms.IntegerField()
     savings_amount=forms.IntegerField()
     savings_interest_rate=forms.IntegerField()

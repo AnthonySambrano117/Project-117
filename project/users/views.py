@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, authenticate
-from .forms import RegistrationForm, MonthlyExpenseForm, AssentsForm, BudgetReviewForm, BaseForm as LoginForm
+from .forms import RegistrationForm, MonthlyExpenseForm, AssetsForm, BudgetReviewForm, BaseForm as LoginForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
 from django.contrib.auth.models import User
+from . models import Assets
 # from django.contrib.auth.views import LoginView
 # Create your views here.
 
@@ -137,8 +138,9 @@ def expencesTotal(request):
 
 
 def budget(request):
+    print("hello world")
     form=MonthlyExpenseForm()
-    incomeform = AssentsForm()
+    incomeform = AssetsForm()
     BudgetReview=BudgetReviewForm()
     context={
         # 'forms':form,
@@ -146,18 +148,44 @@ def budget(request):
         # 'BudgetOut': BudgetReview
 
     }
-    print(context)
     #   if request.method == "GET":
     #     form = RegistrationForm
-    # else:
+    if request.method == "GET":
+       form = incomeform
+
+    else:
     #     # Create a form instance and populate it with data from the request:
-    #     form = RegistrationForm(request.POST)
+        form = AssetsForm(request.POST)
     #     # Check if the form is valid:
-    #     if form.is_valid():
-    #         # Process the data in form.cleaned_data as required
-    #         username = form.cleaned_data['username']
-    #         email = form.cleaned_data['email']
-    #         password = form.cleaned_data['password']  # password123
-    #         password_confirmation = form.cleaned_data['password_confirmation']
+        print("This happened")
+        if form.is_valid():
+     # Process the data in form.cleaned_data as required
+            income=form.cleaned_data['income']
+            savings_amount=form.cleaned_data['savings_amount']
+            savings_interest_rate=form.cleaned_data['savings_interest_rate']
+            amount_in_stocks=form.cleaned_data['amount_in_stocks']
+            yes_no_401K=form.cleaned_data['yes_no_401K']
+            interest_401K_match=form.cleaned_data['interest_401K_match']
+            roth_investing=form.cleaned_data['roth_investing']
+            roth_amount=form.cleaned_data['roth_amount']
+            pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
+
+            # Create a new assent object and save to the database
+            new_assent=Assets()
+            new_assent.income=income
+            new_assent.savings_amount=savings_amount
+            new_assent.savings_interest_rate=savings_interest_rate
+            new_assent.amount_in_stocks=amount_in_stocks
+            new_assent.yes_no_401K=yes_no_401K
+            new_assent.interest_401K_match=interest_401K_match
+            new_assent.roth_investing=roth_investing
+            new_assent.roth_amount=roth_amount
+            new_assent.pass_miscellaneous=pass_miscellaneous
+            new_assent.user=request.user
+            new_assent.save()
+            print(request.user)
+            print(context)
+            print(new_assent)
+
     return render(request,'users/budget.html', context)
     

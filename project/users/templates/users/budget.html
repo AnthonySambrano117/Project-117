@@ -41,7 +41,7 @@
                             </ul>
                         </div>
         
-                        <form role="form" action="{% url 'budget' %}" mathod ="POST" class="login-box">
+                        <form role="form" action="{% url 'budget' %}" method ="POST" class="login-box">
                             <div class="tab-content" id="main_form">
                                 <div class="tab-pane active" role="tabpanel" id="step1">
                                     <h4 class="text-center">Step 1</h4>
@@ -49,12 +49,12 @@
                                             <H3>Your Income</H3>
                                             {% csrf_token %}
                                             {{ incomeform.as_p }}
-                                  
+                            
                                     <ul class="list-inline pull-right">
                                         <li><button type="button" class="default-btn next-step">Continue to next step</button></li>
                                         <li><input type="submit" value="Make Budget" name=""></li>
                                     </ul>
-                                    
+                                </form>            
                                 </div>
                                 <div class="tab-pane" role="tabpanel" id="step2">
                                     <h4 class="text-center">Step 2</h4>
