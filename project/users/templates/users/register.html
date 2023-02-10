@@ -1,7 +1,15 @@
-<h3>Register</h3>
+{% extends 'users/base.html' %}
 
-<form method="POST" action="">
+
+
+{% block content  %}
+<h3>Register</h3>
+<form method="POST" action="{% url 'register' %}">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="Create User" name="Create User"
+    {{ form.as_p }}
+    <input type="submit" value="Creat Account" name="">
 </form>
+{% endblock content  %}
+
+
+
