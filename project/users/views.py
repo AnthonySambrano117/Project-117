@@ -4,7 +4,7 @@ from .forms import RegistrationForm, MonthlyExpenseForm, AssetsForm, BudgetRevie
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
 from django.contrib.auth.models import User
-from . models import Assets
+from . models import Assets, MonthlyExpenseModel, BudgetReview
 # from django.contrib.auth.views import LoginView
 # Create your views here.
 
@@ -138,12 +138,11 @@ def expencesTotal(request):
 
 
 def budget(request):
-    print("hello world")
-    form=MonthlyExpenseForm()
+    expenses=MonthlyExpenseForm()
     incomeform = AssetsForm()
-    BudgetReview=BudgetReviewForm()
+    # BudgetReview=BudgetReviewForm()
     context={
-        # 'forms':form,
+        'monthlyExpense': expenses,
         'incomeform': incomeform,
         # 'BudgetOut': BudgetReview
 
@@ -156,36 +155,101 @@ def budget(request):
     else:
     #     # Create a form instance and populate it with data from the request:
         form = AssetsForm(request.POST)
+        formTwo = MonthlyExpenseForm(request.POST)
     #     # Check if the form is valid:
-        print("This happened")
+        
         if form.is_valid():
      # Process the data in form.cleaned_data as required
-            income=form.cleaned_data['income']
-            savings_amount=form.cleaned_data['savings_amount']
-            savings_interest_rate=form.cleaned_data['savings_interest_rate']
-            amount_in_stocks=form.cleaned_data['amount_in_stocks']
-            yes_no_401K=form.cleaned_data['yes_no_401K']
-            interest_401K_match=form.cleaned_data['interest_401K_match']
-            roth_investing=form.cleaned_data['roth_investing']
-            roth_amount=form.cleaned_data['roth_amount']
-            pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
+            saveAssets(form, request)
+            saveMonthlyExpenses(formTwo, request)
 
-            # Create a new assent object and save to the database
-            new_assent=Assets()
-            new_assent.income=income
-            new_assent.savings_amount=savings_amount
-            new_assent.savings_interest_rate=savings_interest_rate
-            new_assent.amount_in_stocks=amount_in_stocks
-            new_assent.yes_no_401K=yes_no_401K
-            new_assent.interest_401K_match=interest_401K_match
-            new_assent.roth_investing=roth_investing
-            new_assent.roth_amount=roth_amount
-            new_assent.pass_miscellaneous=pass_miscellaneous
-            new_assent.user=request.user
-            new_assent.save()
-            print(request.user)
-            print(context)
-            print(new_assent)
+            # income=form.cleaned_data['income']
+            # savings_amount=form.cleaned_data['savings_amount']
+            # savings_interest_rate=form.cleaned_data['savings_interest_rate']
+            # amount_in_stocks=form.cleaned_data['amount_in_stocks']
+            # yes_no_401K=form.cleaned_data['yes_no_401K']
+            # interest_401K_match=form.cleaned_data['interest_401K_match']
+            # roth_investing=form.cleaned_data['roth_investing']
+            # roth_amount=form.cleaned_data['roth_amount']
+            # pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
+
+            # # Create a new assent object and save to the database
+            # new_assent=Assets()
+            # new_assent.income=income
+            # new_assent.savings_amount=savings_amount
+            # new_assent.savings_interest_rate=savings_interest_rate
+            # new_assent.amount_in_stocks=amount_in_stocks
+            # new_assent.yes_no_401K=yes_no_401K
+            # new_assent.interest_401K_match=interest_401K_match
+            # new_assent.roth_investing=roth_investing
+            # new_assent.roth_amount=roth_amount
+            # new_assent.pass_miscellaneous=pass_miscellaneous
+            # new_assent.user=request.user
+            # new_assent.save()
+            # print(request.user)
+            # print(context)
+            # print(new_assent)
 
     return render(request,'users/budget.html', context)
+
+
+def saveAssets(form, request):
+
+    # Create a new assent object and save to the database
+    new_assent=Assets()
+    new_assent.income=form.cleaned_data['income']
+    new_assent.savings_amount=form.cleaned_data['savings_amount']
+    new_assent.savings_interest_rate=form.cleaned_data['savings_interest_rate']
+    new_assent.amount_in_stocks=form.cleaned_data['amount_in_stocks']
+    new_assent.yes_no_401K=form.cleaned_data['yes_no_401K']
+    new_assent.interest_401K_match=form.cleaned_data['interest_401K_match']
+    new_assent.roth_investing=form.cleaned_data['roth_investing']
+    new_assent.roth_amount=form.cleaned_data['roth_amount']
+    new_assent.pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
+    new_assent.user=request.user
+    new_assent.save()
+
+def saveMonthlyExpenses(formTwo, request):
+    new_expense=MonthlyExpenseModel()
+    new_expense.amount_cars=formTwo.cleaned_data['amount_cars']
+    new_expense.rent_bill=formTwo.cleaned_data['rent_bill']
+    new_expense.mortgage_bill=formTwo.cleaned_data['mortgage_bill']
+    new_expense.mortgage_interest_rate=formTwo.cleaned_data['mortgage_interest_rate']
+    new_expense.gorcerys=formTwo.cleaned_data['gorcerys']
+    new_expense.dinning_out=formTwo.cleaned_data['dinning_out']
+    new_expense.gas=formTwo.cleaned_data['gas']
+    new_expense.utilites=formTwo.cleaned_data['utilites']
+    new_expense.internet=formTwo.cleaned_data['internet']
+    new_expense.phone_bill=formTwo.cleaned_data['phone_bill']
+    new_expense.miscellaneous=formTwo.cleaned_data['miscellaneous']
+    new_expense.user=request.user
+    new_expense.save()
+
+# def saveAssets(form, request):
+#     income=form.cleaned_data['income']
+#     savings_amount=form.cleaned_data['savings_amount']
+#     savings_interest_rate=form.cleaned_data['savings_interest_rate']
+#     amount_in_stocks=form.cleaned_data['amount_in_stocks']
+#     yes_no_401K=form.cleaned_data['yes_no_401K']
+#     interest_401K_match=form.cleaned_data['interest_401K_match']
+#     roth_investing=form.cleaned_data['roth_investing']
+#     roth_amount=form.cleaned_data['roth_amount']
+#     pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
+
+#     # Create a new assent object and save to the database
+#     new_assent=Assets()
+#     new_assent.income=income
+#     new_assent.savings_amount=savings_amount
+#     new_assent.savings_interest_rate=savings_interest_rate
+#     new_assent.amount_in_stocks=amount_in_stocks
+#     new_assent.yes_no_401K=yes_no_401K
+#     new_assent.interest_401K_match=interest_401K_match
+#     new_assent.roth_investing=roth_investing
+#     new_assent.roth_amount=roth_amount
+#     new_assent.pass_miscellaneous=pass_miscellaneous
+#     new_assent.user=request.user
+#     new_assent.save()
+
+# def FinacneReview():
+
     

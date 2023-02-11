@@ -50,6 +50,9 @@ class BudgetReviewForm(forms.Form):
     Under_Over_Budget=forms.IntegerField()
     # user = models.ForeignKey(BaseModel, on_delete=models.CASCADE)
 
+# class FinancialInfo(MonthlyExpenseForm, AssetsForm):
+
+
 
 
 

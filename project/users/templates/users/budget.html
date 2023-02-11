@@ -27,7 +27,7 @@
                             <div class="connecting-line"></div>
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
-                                    <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" aria-expanded="true"><span class="round-tab">1 </span> <i>Step 1</i></a>
+                                    <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" aria-expanded="true"><span class="round-tab">1 </span> <i>Assets</i></a>
                                 </li>
                                 <li role="presentation" class="disabled">
                                     <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" aria-expanded="false"><span class="round-tab">2</span> <i>Step 2</i></a>
@@ -44,7 +44,7 @@
                         <form role="form" action="{% url 'budget' %}" method ="POST" class="login-box">
                             <div class="tab-content" id="main_form">
                                 <div class="tab-pane active" role="tabpanel" id="step1">
-                                    <h4 class="text-center">Step 1</h4>
+                                    <h4 class="text-center">Input Your Assets</h4>
             
                                             <H3>Your Income</H3>
                                             {% csrf_token %}
@@ -52,21 +52,26 @@
                             
                                     <ul class="list-inline pull-right">
                                         <li><button type="button" class="default-btn next-step">Continue to next step</button></li>
-                                        <li><input type="submit" value="Make Budget" name=""></li>
+                                        {% comment %} <li><input type="submit" value="Make Budget" name="Continue"></li> {% endcomment %}
                                     </ul>
-                                </form>            
+                                    
+                                {% comment %} </form>             {% endcomment %}
                                 </div>
                                 <div class="tab-pane" role="tabpanel" id="step2">
-                                    <h4 class="text-center">Step 2</h4>
+                                    <h4 class="text-center">Expenses</h4>
                                     <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Address 1 *</label> 
+                                            <H3>Your Expense</H3>
+                                            {% csrf_token %}
+                                            {{ monthlyExpense.as_p }}
+                                            {% comment %} <label>Address 1 *</label>  {% endcomment %}
                                             <input class="form-control" type="text" name="name" placeholder=""> 
                                         </div>
                                     </div>
+                                   
                                     
-                                    <div class="col-md-6">
+                                    {% comment %} <div class="col-md-6">
                                         <div class="form-group">
                                             <label>City / Town *</label> 
                                             <input class="form-control" type="text" name="name" placeholder=""> 
@@ -84,24 +89,26 @@
                                                 <option value="NO">Norway</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
                                     
                                     
                                     
-                                    <div class="col-md-6">
+                                    {% comment %} <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Registration No.</label> 
                                             <input class="form-control" type="text" name="name" placeholder=""> 
                                         </div>
                                     </div>
-                                   </div>
+                                   </div> {% endcomment %}
                                     
                                     
                                     <ul class="list-inline pull-right">
                                         <li><button type="button" class="default-btn prev-step">Back</button></li>
-                                        <li><button type="button" class="default-btn next-step skip-btn">Skip</button></li>
+                                        {% comment %} <li><button type="button" class="default-btn next-step skip-btn">Skip</button></li> {% endcomment %}
                                         <li><button type="button" class="default-btn next-step">Continue</button></li>
+                                        <li><input type="submit" value="Make Budget" name="Continue"></li>
                                     </ul>
+                                </form> 
                                 </div>
                                 <div class="tab-pane" role="tabpanel" id="step3">
                                     <h4 class="text-center">Step 3</h4>
