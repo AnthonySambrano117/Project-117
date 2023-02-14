@@ -96,8 +96,9 @@ def profile(request):
     #     'forms':form
     # }
     # Pass context into template
-    print(request)
-    return render(request, 'users/profile.html')
+    results=FinanceReview(request)
+    
+    return render(request, 'users/profile.html', results)
 
 def base(request):
     # context= {
@@ -121,18 +122,6 @@ def expencesTotal(request):
 #     if rent>=(expencesTotal*.3)
 #         print("Your rent is expense is high. Most advisers recommended 30% or lower of your income should go to housing")
     
-# amount_cars=models.IntegerField()
-#     rent_bill=models.IntegerField()
-#     mortgage_bill=models.IntegerField()
-#     mortgage_interest_rate=models.IntegerField()
-#     gorcerys=models.IntegerField()
-#     dinning_out=models.IntegerField()
-#     gas=models.IntegerField()
-#     internet=models.IntegerField()
-#     phone_bill=models.IntegerField()
-#     utilites=models.IntegerField()
-#     miscellaneous=models.IntegerField()
-#     user = models.ForeignKey(BaseModel, on_delete=models.CASCADE)
 
 
 
@@ -158,38 +147,13 @@ def budget(request):
         formTwo = MonthlyExpenseForm(request.POST)
     #     # Check if the form is valid:
         
-        if form.is_valid():
+        if form.is_valid() and formTwo.is_valid():
      # Process the data in form.cleaned_data as required
             saveAssets(form, request)
             saveMonthlyExpenses(formTwo, request)
 
-            # income=form.cleaned_data['income']
-            # savings_amount=form.cleaned_data['savings_amount']
-            # savings_interest_rate=form.cleaned_data['savings_interest_rate']
-            # amount_in_stocks=form.cleaned_data['amount_in_stocks']
-            # yes_no_401K=form.cleaned_data['yes_no_401K']
-            # interest_401K_match=form.cleaned_data['interest_401K_match']
-            # roth_investing=form.cleaned_data['roth_investing']
-            # roth_amount=form.cleaned_data['roth_amount']
-            # pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
-
-            # # Create a new assent object and save to the database
-            # new_assent=Assets()
-            # new_assent.income=income
-            # new_assent.savings_amount=savings_amount
-            # new_assent.savings_interest_rate=savings_interest_rate
-            # new_assent.amount_in_stocks=amount_in_stocks
-            # new_assent.yes_no_401K=yes_no_401K
-            # new_assent.interest_401K_match=interest_401K_match
-            # new_assent.roth_investing=roth_investing
-            # new_assent.roth_amount=roth_amount
-            # new_assent.pass_miscellaneous=pass_miscellaneous
-            # new_assent.user=request.user
-            # new_assent.save()
-            # print(request.user)
-            # print(context)
-            # print(new_assent)
-
+    
+        return render(request,'users/profile.html')
     return render(request,'users/budget.html', context)
 
 
@@ -225,31 +189,28 @@ def saveMonthlyExpenses(formTwo, request):
     new_expense.user=request.user
     new_expense.save()
 
-# def saveAssets(form, request):
-#     income=form.cleaned_data['income']
-#     savings_amount=form.cleaned_data['savings_amount']
-#     savings_interest_rate=form.cleaned_data['savings_interest_rate']
-#     amount_in_stocks=form.cleaned_data['amount_in_stocks']
-#     yes_no_401K=form.cleaned_data['yes_no_401K']
-#     interest_401K_match=form.cleaned_data['interest_401K_match']
-#     roth_investing=form.cleaned_data['roth_investing']
-#     roth_amount=form.cleaned_data['roth_amount']
-#     pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
 
-#     # Create a new assent object and save to the database
-#     new_assent=Assets()
-#     new_assent.income=income
-#     new_assent.savings_amount=savings_amount
-#     new_assent.savings_interest_rate=savings_interest_rate
-#     new_assent.amount_in_stocks=amount_in_stocks
-#     new_assent.yes_no_401K=yes_no_401K
-#     new_assent.interest_401K_match=interest_401K_match
-#     new_assent.roth_investing=roth_investing
-#     new_assent.roth_amount=roth_amount
-#     new_assent.pass_miscellaneous=pass_miscellaneous
-#     new_assent.user=request.user
-#     new_assent.save()
+def FinanceReview(request):
+    users_expenses=MonthlyExpenseModel.objects.all().filter(user=request.user)
+    expensesTotal=0
+    for debt in users_expenses:
+        expensesTotal+=debt
+    # print(expencesTotal)
+    context={
+        'users_expenses': users_expenses,
+        'expensesTotal': expensesTotal
+    }
+    # print(f'great stuff{users_expenses}')
+    # for expenses in users_expenses:
+    #     print(expenses.amount_cars)
+    # print(users_expenses[1].amount_cars)
+    return context
 
-# def FinacneReview():
+
+
+    # def index(request):
+    # # Get all public posts and order by date created (newest first)
+    # posts = BlogPost.objects.all().order_by('-created_date')
+    # return render(request, 'blog/index.html', {"posts": posts})
 
     

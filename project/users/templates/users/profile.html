@@ -1,7 +1,32 @@
 {% extends 'users/base.html' %}
 {% block content  %}
 <h3>Profile</h3>
+<h1>Expense</h1>
 <h1>Welcome {{ request.user.username }}</h1>
-{% endblock content  %}
+{% for expenses in users_expenses %}
+<h1>{{ expenses.amount_cars }}</h1>
+
+{% comment %} <P>{{ users_expenses.as_p }}</p> {% endcomment %}
+
+{% endfor %}
+{% endblock content %}
 
 
+{% comment %} {% block title %}
+Humbler
+{% endblock %}
+
+{% block content %}
+<h1>Humbler</h1>
+
+{% for post in posts %}
+<h2>{{post.title}}</h2>
+{% if post.image %}
+<img src="{{post.image.url}}" alt="">
+{% endif %}
+<p>{{post.body}}</p>
+<p>{{post.user.username}}</p>
+<p>{{post.edited_date}}</p>
+<hr>
+{% endfor %}
+{% endblock %} {% endcomment %}

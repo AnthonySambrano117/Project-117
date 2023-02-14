@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -12,7 +13,7 @@ class BaseModel(models.Model):
 class RegistrationModel(BaseModel):
     email = models.EmailField()
     password_confirmation = models.CharField(validators=[MinLengthValidator(11)], max_length=32)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
 class MonthlyExpenseModel(models.Model):
     amount_cars=models.IntegerField()
@@ -27,6 +28,7 @@ class MonthlyExpenseModel(models.Model):
     utilites=models.IntegerField()
     miscellaneous=models.IntegerField()
     # user_id = models.ForeignKey(models.IntegerField(), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
 class Assets(models.Model):
     income=models.IntegerField()
@@ -39,6 +41,8 @@ class Assets(models.Model):
     roth_amount=models.IntegerField()
     pass_miscellaneous=models.IntegerField()
     # user_id = models.ForeignKey(models.IntegerField(), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    
     
 
 
@@ -47,6 +51,7 @@ class BudgetReview(models.Model):
     Total_Monthly_Expenses=models.IntegerField()
     Under_Over_Budget=models.IntegerField()
     # user = models.ForeignKey(BaseModel, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
 
 
