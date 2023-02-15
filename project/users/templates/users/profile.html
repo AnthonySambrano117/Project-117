@@ -3,12 +3,19 @@
 <h3>Profile</h3>
 <h1>Expense</h1>
 <h1>Welcome {{ request.user.username }}</h1>
-{% for expenses in users_expenses %}
-<h1>{{ expenses.amount_cars }}</h1>
+{% comment %} {% for expenses in users_expenses %} {% endcomment %}
+<h1>Your Assets</h1>
+<h2>{{ total_Assets }}</h2>
+<h1> Your Expense</h1>
+<h2>{{ total_expenses }}</h2>
+
+
+{% comment %} users_expenses': users_expenses[0],
+        'total_expense': users_expenses[0].total_expenses {% endcomment %}
 
 {% comment %} <P>{{ users_expenses.as_p }}</p> {% endcomment %}
-
-{% endfor %}
+{% comment %} {% endfor %} {% endcomment %}
+{% comment %} {% context %} {% endcomment %}
 {% endblock content %}
 
 

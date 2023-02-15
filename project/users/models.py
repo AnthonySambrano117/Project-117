@@ -27,12 +27,14 @@ class MonthlyExpenseModel(models.Model):
     phone_bill=models.IntegerField()
     utilites=models.IntegerField()
     miscellaneous=models.IntegerField()
+    created_date = models.DateTimeField(auto_now_add=True)
     # user_id = models.ForeignKey(models.IntegerField(), on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    total_expenses=models.IntegerField(default=0)
 
 class Assets(models.Model):
     income=models.IntegerField()
-    savings_amount=models.IntegerField()
+    Amount_In_Savings=models.IntegerField(default=0)
     savings_interest_rate=models.IntegerField()
     amount_in_stocks=models.IntegerField()
     yes_no_401K=models.CharField(max_length=3)
@@ -40,8 +42,10 @@ class Assets(models.Model):
     roth_investing=models.IntegerField()
     roth_amount=models.IntegerField()
     pass_miscellaneous=models.IntegerField()
+    created_date = models.DateTimeField(auto_now_add=True)
     # user_id = models.ForeignKey(models.IntegerField(), on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    total_Assets=models.IntegerField(default=0)
     
     
 
