@@ -46,9 +46,9 @@
                                 <div class="tab-pane active" role="tabpanel" id="step1">
                                     <h4 class="text-center">Input Your Assets</h4>
             
-                                            <H3>Your Income</H3>
+                                         
                                             {% csrf_token %}
-                                            {{ incomeform.as_p }}
+                                            {{ monthly_incomeform.as_p }}
                             
                                     <ul class="list-inline pull-right">
                                         <li><button type="button" class="default-btn next-step">Continue to next step</button></li>
@@ -58,11 +58,11 @@
                                 {% comment %} </form>             {% endcomment %}
                                 </div>
                                 <div class="tab-pane" role="tabpanel" id="step2">
-                                    <h4 class="text-center">Expenses</h4>
+                                    <h4 class="text-center">Input Your Expenses</h4>
                                     <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <H3>Your Expenses</H3>
+                                       
                                             {% csrf_token %}
                                             {{ monthlyExpense.as_p }}
                                             {% comment %} <label>Address 1 *</label>  {% endcomment %}

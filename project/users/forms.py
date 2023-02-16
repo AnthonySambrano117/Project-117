@@ -20,12 +20,12 @@ class RegistrationForm(BaseForm):
 #         fields=['username', 'password', 'email']
 #         # exlude=['username']
 class MonthlyExpenseForm(forms.Form):
-    amount_cars=forms.IntegerField()
-    rent_bill=forms.IntegerField()
-    mortgage_bill=forms.IntegerField()
+    rent_or_mortgage_payment=forms.IntegerField()
+    car_payment =forms.IntegerField()
+    # mortgage_bill=forms.IntegerField()
     mortgage_interest_rate=forms.IntegerField()
-    gorcerys=forms.IntegerField()
-    dinning_out=forms.IntegerField()
+    groceries=forms.IntegerField()
+    dining_out=forms.IntegerField()
     gas=forms.IntegerField()
     internet=forms.IntegerField()
     phone_bill=forms.IntegerField()
@@ -33,15 +33,15 @@ class MonthlyExpenseForm(forms.Form):
     miscellaneous=forms.IntegerField()
 
 class AssetsForm(forms.Form):
-    income=forms.IntegerField()
-    savings_amount=forms.IntegerField()
-    savings_interest_rate=forms.IntegerField()
+    monthly_income=forms.IntegerField()
+    amount_in_savings=forms.IntegerField()
+    interest_rate_on_savings_account=forms.IntegerField()
     amount_in_stocks=forms.IntegerField()
-    yes_no_401K=forms.CharField(max_length=3)
+    investing_in_401K=forms.CharField(max_length=3)
     interest_401K_match=forms.IntegerField()
-    roth_investing=forms.IntegerField()
-    roth_amount=forms.IntegerField()
-    pass_miscellaneous=forms.IntegerField()
+    monthly_amount_investing_in_roth=forms.IntegerField()
+    # roth_amount=forms.IntegerField()
+    # pass_miscellaneous=forms.IntegerField()
     # user = forms.ForeignKey(BaseModel, on_delete=models.CASCADE)
 
 class BudgetReviewForm(forms.Form):
