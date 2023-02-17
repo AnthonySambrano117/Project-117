@@ -93,14 +93,15 @@ def profile(request):
 
     if len(users_expenses)==0 or len(users_assets)==0:
         return redirect('budget')
-    UserReview(users_expenses[0],users_assets[0])
+    feedback=UserReview(users_expenses[0],users_assets[0])
+    print(feedback)
     
     context={
         'users_expenses': users_expenses[0],
         'total_expenses': users_expenses[0].total_expenses,
         'users_assets': users_assets[0],
         'total_Assets': users_assets[0].total_Assets,
-
+        'feedback': feedback
         # 'expensesTotal': expensesTotal
     }
     
@@ -169,10 +170,10 @@ def saveAssets(form, request):
     new_asset=Assets()
     new_asset.monthly_income=form.cleaned_data['monthly_income']
     new_asset.amount_in_savings=form.cleaned_data['amount_in_savings']
-    new_asset.interest_rate_on_savings_account=form.cleaned_data['interest_rate_on_savings_account']
+    new_asset.interest_rate_on_savings_account=form.cleaned_data['interest_rate_on_savings_account'] #done
     new_asset.amount_in_stocks=form.cleaned_data['amount_in_stocks']
-    new_asset.investing_in_401K=form.cleaned_data['investing_in_401K']
-    new_asset.interest_401K_match=form.cleaned_data['interest_401K_match']
+    new_asset.investing_in_401K=form.cleaned_data['investing_in_401K']#done
+    new_asset.interest_401K_match=form.cleaned_data['interest_401K_match']#done
     new_asset.monthly_amount_investing_in_roth=form.cleaned_data['monthly_amount_investing_in_roth']
     # new_asset.roth_amount=form.cleaned_data['roth_amount']
     # new_asset.pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
@@ -183,16 +184,16 @@ def saveAssets(form, request):
 
 def saveMonthlyExpenses(formTwo, request):
     new_expense=MonthlyExpenseModel()
-    new_expense.car_payment=formTwo.cleaned_data['car_payment']
-    new_expense.rent_or_mortgage_payment=formTwo.cleaned_data['rent_or_mortgage_payment']
+    new_expense.car_payment=formTwo.cleaned_data['car_payment'] #done
+    new_expense.rent_or_mortgage_payment=formTwo.cleaned_data['rent_or_mortgage_payment'] #done
     # new_expense.mortgage_bill=formTwo.cleaned_data['mortgage_bill']
-    new_expense.mortgage_interest_rate=formTwo.cleaned_data['mortgage_interest_rate']
-    new_expense.groceries=formTwo.cleaned_data['groceries']
+    new_expense.mortgage_interest_rate=formTwo.cleaned_data['mortgage_interest_rate'] #done
+    new_expense.groceries=formTwo.cleaned_data['groceries'] 
     new_expense.dining_out=formTwo.cleaned_data['dining_out']
-    new_expense.gas=formTwo.cleaned_data['gas']
+    new_expense.gas=formTwo.cleaned_data['gas'] #done
     new_expense.utilites=formTwo.cleaned_data['utilites']
-    new_expense.internet=formTwo.cleaned_data['internet']
-    new_expense.phone_bill=formTwo.cleaned_data['phone_bill']
+    new_expense.internet=formTwo.cleaned_data['internet'] #done
+    new_expense.phone_bill=formTwo.cleaned_data['phone_bill']#done
     new_expense.miscellaneous=formTwo.cleaned_data['miscellaneous']
     new_expense.user=request.user
     total_expenses=new_expense.car_payment + new_expense.rent_or_mortgage_payment + new_expense.groceries + new_expense.dining_out + new_expense.gas + new_expense.internet + new_expense.utilites + new_expense.phone_bill + new_expense.miscellaneous
@@ -203,15 +204,57 @@ def saveMonthlyExpenses(formTwo, request):
 def UserReview(user_expenses,user_assets):
     neg_advice_list=[]
     pro_advice_list=[]
-    if user_expenses.car_payment>=(user_assets.total_Assets*.1):
-        neg_advice_list.append('Your car payment is to high. Your car payment should be 10% percent of you budget')
-        print('Your car payment is to high. Your car payment should be 10% percent of you budget')
+    if user_expenses.car_payment>=(user_assets.monthly_income*.1):
+        neg_advice_list.append('Your car payment is to high. Your car payment should be no more then 10% percent of you budget')
+        # print('Your car payment is to high. Your car payment should be 10% percent of you budget')
     else: 
-        pro_advice_list.append("You car payment is within budget")
+        pro_advice_list.append("You car payment is within budget, is less then 10% of your income")
     print(neg_advice_list)
+    if user_expenses.rent_or_mortgage_payment>=(user_assets.monthly_income*.3):
+        neg_advice_list.append('Your rent or mortgage payment is to high. Your housing expense should less 30% of your budget')
+    else: 
+        pro_advice_list.append("You rent or mortgage payment is within budget, and is less then 30% of your income")
+#         print("Your rent is expense is high. Most advisers recommended 30% or lower of your monthly_income should go to housing")
+    if user_expenses.mortgage_interest_rate>5:
+        neg_advice_list.append("Your mortgage interest rate is high. Possible seek to refinance to lower your mortgage interest rate.")
+    else:
+        pro_advice_list.append('Your mortgage is at good level. The lower your interest rate, the more money you can save in mortgage low.')
+
+    if user_expenses.groceries>=(user_assets.monthly_income):
+        neg_advice_list.append("You grocerie cost per month is to high. The average cost per person to cost that individual should spend on groceries is $250 a month.")
+    else:
+        pro_advice_list.append('Your grocerie budget is at good amount, and is within 250 dollors per person each month')
+    if user_expenses.gas>=200:
+         neg_advice_list.append('Average person in US. Spends $200 a month on gas. You should seek ways to decrease your cost of gas spending.')
+    else:
+        pro_advice_list.append("Average person in US. Spends $200 a month on gas. You are within or below that cost averge, good job.")
+    if user_expenses.internet>=90:
+        neg_advice_list.append('The average Interent cost within the U.S is 60 to 90 dollors per month. You could seek to decrease your cost of internet by looking for cheaper companies.')
+    else:
+        pro_advice_list.append('You are within the average speanding on internet.')
+    if user_expenses.phone_bill>=114:
+        neg_advice_list.append('Phone bills can get costly. Your phone bill is above the average monthly spending of $114 per month. You can seek to decrease your phone bill by swithing services or having friends or family join your plan to make it lower.')
+    else:   
+        pro_advice_list.append('Phone Bill you have is low and within good standing of being below $114 dollars per month')
+
+    #Assents FeedBack
+    if user_assets.interest_rate_on_savings_account<=.1:
+        neg_advice_list.append("There alot of savings accounts that have high interest rates that can help make some passive income. Currently you have bank account that dosen't have a good interest rate. You can find bank acocunts up to 5% interest rate. You can find a better oppurnity by placing your money into high intest rate savings account")
+    else:
+        pro_advice_list.append('You have bank savings account with high interest rate, because of this your money is not lossing as much value and you have some passive income, good job.')
+    if user_assets.investing_in_401K==0:
+        neg_advice_list.append("Some companies have 401K that you can invest in. You can invest and roth at the sametime. You could seek your employer to see if they offer 401K.")
+    else:
+        pro_advice_list.append('Your investing 401K, and is good fincial tool to help with retirment.')
+    if user_assets.interest_401K_match<3:
+        neg_advice_list.append('Most 401K offer more then 3% matching. This means if you input 3% of your pay check to 401K, your employer will also match up to 3 percent into your 401K. As result you will have 6% each month go into your 401K. You should seek to see if your employer as better 401K plans or possible seek for another job where the other employer as a higher 401K match rate.')
+    else:
+        pro_advice_list.append('Your 401K match is within the normal range of 3 to 5 percent match rate. You should always seek to max your 401k match rate. For example, if your employer offers up to 5 percent match rate. You should invest at least 5 percent into 401K. Its free money that your employer is offering to give you for your retirment.')
+
     
     
-    return [neg_advice_list, pro_advice_list]
+    return {'negative': neg_advice_list, 'positive': pro_advice_list}
+    # return [neg_advice_list, pro_advice_list]
 
     
 

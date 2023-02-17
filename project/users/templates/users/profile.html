@@ -2,12 +2,28 @@
 {% block content  %}
 <h3>Profile</h3>
 <h1>Expense</h1>
-<h1>Welcome {{ request.user.username }}</h1>
+<h1>Welcome <cap>{{ request.user.username }}</cap></h1>
 {% comment %} {% for expenses in users_expenses %} {% endcomment %}
 <h1>Your Assets</h1>
 <h2>{{ total_Assets }}</h2>
+
+{% for postive in feedback.positive %}
+<p>{{postive}}<p>
+{% endfor %}
+
+
 <h1> Your Expense</h1>
 <h2>{{ total_expenses }}</h2>
+{% for neg in feedback.negative%}
+<p>{{neg}}</p>
+{% comment %} {% if post.image %}
+<img src="{{post.image.url}}" alt="">
+{% endif %} {% endcomment %}
+{% comment %} <p>{{post.body}}</p>
+<p>{{post.user.username}}</p>
+<p>{{post.edited_date}}</p> {% endcomment %}
+{% endfor %}
+
 
 
 {% comment %} users_expenses': users_expenses[0],

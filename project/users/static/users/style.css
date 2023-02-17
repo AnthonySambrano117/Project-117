@@ -6,6 +6,9 @@ nav.navbar{
     height: 95px;
     
   }
+  .cap{
+  text-transform: capitalize
+  }
   .container {
     position: relative;
     text-align: center;
