@@ -5,9 +5,10 @@ from django import forms
 
 
 class BaseForm(forms.Form):
-    username = forms.CharField(max_length=32, min_length=3)
+    username = forms.CharField(max_length=32, min_length=3, label='Username', 
+                    widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     password = forms.CharField(
-        widget=forms.PasswordInput(), min_length=8, max_length=32)
+        widget=forms.PasswordInput(attrs={'placeholder':'Password'}), min_length=8, max_length=32)
 
 # # Create a form class that inherits from BaseForm
 class RegistrationForm(BaseForm):

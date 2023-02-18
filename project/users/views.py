@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
 from django.contrib.auth.models import User
 from . models import Assets, MonthlyExpenseModel, BudgetReview
+
+
 # from django.contrib.auth.views import LoginView
 # Create your views here.
 
@@ -94,7 +96,6 @@ def profile(request):
     if len(users_expenses)==0 or len(users_assets)==0:
         return redirect('budget')
     feedback=UserReview(users_expenses[0],users_assets[0])
-    print(feedback)
     
     context={
         'users_expenses': users_expenses[0],
@@ -209,7 +210,7 @@ def UserReview(user_expenses,user_assets):
         # print('Your car payment is to high. Your car payment should be 10% percent of you budget')
     else: 
         pro_advice_list.append("You car payment is within budget, is less then 10% of your income")
-    print(neg_advice_list)
+
     if user_expenses.rent_or_mortgage_payment>=(user_assets.monthly_income*.3):
         neg_advice_list.append('Your rent or mortgage payment is to high. Your housing expense should less 30% of your budget')
     else: 

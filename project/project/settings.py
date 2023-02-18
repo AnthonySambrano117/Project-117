@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'finances',
-    # 'crispy_forms',
+    'crispy_forms',
+    'crispy_tailwind'
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+
+
+CRISPY_TEMPLATE_PACK = "tailwind"
