@@ -1,15 +1,109 @@
 {% extends 'users/base.html' %}
-
-
+{% load crispy_forms_tags %}
+{% load static %}
 
 {% block content  %}
-<h3>Register</h3>
 <form method="POST" action="{% url 'register' %}">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Creat Account" name="">
-</form>
-{% endblock content  %}
+    
+<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-6">
+          <div class="card rounded-3">
+            <img src= "{% static 'users/logo.jpg' %}" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+            alt="Sample photo">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Moon Finances</h2>
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Today!</h3>
+  
+              <form class="px-md-2">
+  
+                <div class="form-outline mb-4">
+                  {% comment %} <input type="text" id="form3Example1q" class="form-control" /> {% endcomment %}
+                  {% comment %} <label class="form-label" for="form3Example1q">Name</label> {% endcomment %}
+                  {% comment %} {{ form|crispy }} {% endcomment %}
+                  {{ form.username|as_crispy_field }}
+                </div>
+
+                <div class="form-outline mb-4">
+                    {% comment %} <input type="text" id="form3Example1q" class="form-control" /> {% endcomment %}
+                    {% comment %} <label class="form-label" for="form3Example1q">Name</label> {% endcomment %}
+                    {% comment %} {{ form|crispy }} {% endcomment %}
+                    {{ form.email|as_crispy_field }}
+                  </div>
+                
+                  <div class="form-outline mb-4">
+                    {% comment %} <input type="text" id="form3Example1q" class="form-control" /> {% endcomment %}
+                    {% comment %} <label class="form-label" for="form3Example1q">Name</label> {% endcomment %}
+                    {% comment %} {{ form|crispy}} {% endcomment %}
+                    {{ form.password|as_crispy_field }}
+                  </div>
+                
+                <div class="form-outline mb-4">
+                    {% comment %} <input type="text" id="form3Example1q" class="form-control" /> {% endcomment %}
+                    {% comment %} <label class="form-label" for="form3Example1q">Name</label> {% endcomment %}
+                    {% comment %} {{ form|crispy }} {% endcomment %}
+                    {{ form.password_confirmation|as_crispy_field }}
+                </div>
+
+                
+                {% comment %} <div class="row">
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline datepicker">
+                      <input type="text" class="form-control" id="exampleDatepicker1" />
+                      <label for="exampleDatepicker1" class="form-label">Select a date</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                    <select class="select">
+                      <option value="1" disabled>Gender</option>
+                      <option value="2">Female</option>
+                      <option value="3">Male</option>
+                      <option value="4">Other</option>
+                    </select>
+  
+                  </div> {% endcomment %}
+                {% comment %} </div>
+  
+                <div class="mb-4">
+  
+                  <select class="select">
+                    <option value="1" disabled>Class</option>
+                    <option value="2">Class 1</option>
+                    <option value="3">Class 2</option>
+                    <option value="4">Class 3</option>
+                  </select>
+  
+                {% comment %} </div> {% endcomment %} 
+  
+                {% comment %} <div class="row mb-4 pb-2 pb-md-0 mb-md-5">
+                  <div class="col-md-6">
+  
+                    <div class="form-outline">
+                      <input type="text" id="form3Example1w" class="form-control" />
+                      <label class="form-label" for="form3Example1w">Registration code</label>
+                    </div>
+  
+                  </div>
+                </div> {% endcomment %}
+
+                <div class="d-flex align-items-center justify-content-center pb-4">
+                    <input class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" value="Register" name="Register">
+                </div>
+              </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock content  %}
 
 
 

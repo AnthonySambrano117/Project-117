@@ -6,6 +6,9 @@ nav.navbar{
     height: 95px;
     
   }
+  .cap{
+  text-transform: capitalize
+  }
   .container {
     position: relative;
     text-align: center;
@@ -48,10 +51,10 @@ nav.navbar{
     object-fit: contain;
 }
 
-.row{
+/* .row{
   padding: 1rem 0;
 
-}
+} */
 
 .color{
     color:white
@@ -124,7 +127,7 @@ button:focus,
     height: 2px;
     background: #e0e0e0;
     position: absolute;
-    width: 75%;
+    width: 65%;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -171,7 +174,7 @@ span.round-tab i{
 }
 
 .wizard .nav-tabs > li {
-    width: 25%;
+    width: 33%;
 }
 
 .wizard li:after {
@@ -408,3 +411,34 @@ input[type="checkbox"]:checked::before{
 		display: block;
 	}
 }
+
+/* Styling for Login */
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #32de84, #ee7724, #d8363a, #dd3675, #b44593);
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    }
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+
+    /* Stylling for Register page */
+    @media (min-width: 1025px) {
+        .h-custom {
+        height: 100vh !important;
+        }
+        }

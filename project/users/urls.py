@@ -10,5 +10,6 @@ urlpatterns = [
     path("login/", views.login, name="login"),
     path("logout/", views.logout, name="logout"),
     path("budget/", views.budget, name="budget"),
-    path("profile/", views.profile, name="profile")
+    path("profile/", views.profile, name="profile"),
+    path('futureinvest/',views.futureInvest, name='futureinvest')
 ]

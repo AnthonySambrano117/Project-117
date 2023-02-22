@@ -1,7 +1,59 @@
 {% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
 {% block content  %}
-<h3>Profile</h3>
-<h1>Welcome {{ request.user.username }}</h1>
-{% endblock content  %}
+
+{% comment %} {% for expenses in users_expenses %} {% endcomment %}
 
 
+<h1>{{ request.user.username }} Your Assets</h1>
+
+<h2>{{ total_Assets }}</h2>
+<ul>
+{% for postive in feedback.positive %}
+<li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">{{postive}}</li>
+</ul>
+{% endfor %}
+
+
+<h1>{{ request.user.username }} Your Expense</h1>
+<h2>{{ total_expenses }}</h2>
+{% for neg in feedback.negative%}
+<ul>
+<li class="list-group-item px-3 border-0 rounded-3 list-group-item-danger mb-2">{{neg}}</li>
+</ul>
+
+{% comment %} {% if post.image %}
+<img src="{{post.image.url}}" alt="">
+{% endif %} {% endcomment %}
+{% comment %} <p>{{post.body}}</p>
+<p>{{post.user.username}}</p>
+<p>{{post.edited_date}}</p> {% endcomment %}
+{% endfor %}
+
+
+{% comment %} Bar Graph Display {% endcomment %}
+<canvas id="horizontalBar"></canvas>
+<canvas id="pieChart"></canvas>
+
+
+{% endblock content %}
+
+
+{% comment %} {% block title %}
+Humbler
+{% endblock %}
+
+{% block content %}
+<h1>Humbler</h1>
+
+{% for post in posts %}
+<h2>{{post.title}}</h2>
+{% if post.image %}
+<img src="{{post.image.url}}" alt="">
+{% endif %}
+<p>{{post.body}}</p>
+<p>{{post.user.username}}</p>
+<p>{{post.edited_date}}</p>
+<hr>
+{% endfor %}
+{% endblock %} {% endcomment %}
