@@ -165,6 +165,11 @@ def budget(request):
     return render(request,'users/budget.html', context)
 
 
+#Future Page
+def futureInvest(request):
+    return render(request, 'users/futureinvest.html')
+
+
 def saveAssets(form, request):
 
     # Create a new assent object and save to the database
@@ -175,7 +180,7 @@ def saveAssets(form, request):
     new_asset.amount_in_stocks=form.cleaned_data['amount_in_stocks']
     new_asset.investing_in_401K=form.cleaned_data['investing_in_401K']#done
     new_asset.interest_401K_match=form.cleaned_data['interest_401K_match']#done
-    new_asset.monthly_amount_investing_in_roth=form.cleaned_data['monthly_amount_investing_in_roth']
+    new_asset.monthly_amount_investing_in_roth=form.cleaned_dat['monthly_amount_investing_in_roth']
     # new_asset.roth_amount=form.cleaned_data['roth_amount']
     # new_asset.pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
     new_asset.user=request.user
@@ -207,7 +212,6 @@ def UserReview(user_expenses,user_assets):
     pro_advice_list=[]
     if user_expenses.car_payment>=(user_assets.monthly_income*.1):
         neg_advice_list.append('Your car payment is to high. Your car payment should be no more then 10% percent of you budget')
-        # print('Your car payment is to high. Your car payment should be 10% percent of you budget')
     else: 
         pro_advice_list.append("You car payment is within budget, is less then 10% of your income")
 
@@ -215,7 +219,7 @@ def UserReview(user_expenses,user_assets):
         neg_advice_list.append('Your rent or mortgage payment is to high. Your housing expense should less 30% of your budget')
     else: 
         pro_advice_list.append("You rent or mortgage payment is within budget, and is less then 30% of your income")
-#         print("Your rent is expense is high. Most advisers recommended 30% or lower of your monthly_income should go to housing")
+
     if user_expenses.mortgage_interest_rate>5:
         neg_advice_list.append("Your mortgage interest rate is high. Possible seek to refinance to lower your mortgage interest rate.")
     else:
@@ -236,7 +240,7 @@ def UserReview(user_expenses,user_assets):
     if user_expenses.phone_bill>=114:
         neg_advice_list.append('Phone bills can get costly. Your phone bill is above the average monthly spending of $114 per month. You can seek to decrease your phone bill by swithing services or having friends or family join your plan to make it lower.')
     else:   
-        pro_advice_list.append('Phone Bill you have is low and within good standing of being below $114 dollars per month')
+        pro_advice_list.append(f'Your phone bill of {user_expenses.phone_bill} is low and within good standing of being below $114 dollars per month')
 
     #Assents FeedBack
     if user_assets.interest_rate_on_savings_account<=.1:
@@ -244,13 +248,14 @@ def UserReview(user_expenses,user_assets):
     else:
         pro_advice_list.append('You have bank savings account with high interest rate, because of this your money is not lossing as much value and you have some passive income, good job.')
     if user_assets.investing_in_401K==0:
-        neg_advice_list.append("Some companies have 401K that you can invest in. You can invest and roth at the sametime. You could seek your employer to see if they offer 401K.")
+        neg_advice_list.append(f" You selected {user_assets.investing_in_401K} for investing into a 401K. Some companies have 401K that you can invest in. You can invest and roth at the sametime. You could seek your employer to see if they offer 401K.")
     else:
-        pro_advice_list.append('Your investing 401K, and is good fincial tool to help with retirment.')
+        pro_advice_list.append(f'You selected {user_assets.investing_in_401K} for investing into a 401K. A 401K is good fincial tool to help with retirment.')
+
     if user_assets.interest_401K_match<3:
-        neg_advice_list.append('Most 401K offer more then 3% matching. This means if you input 3% of your pay check to 401K, your employer will also match up to 3 percent into your 401K. As result you will have 6% each month go into your 401K. You should seek to see if your employer as better 401K plans or possible seek for another job where the other employer as a higher 401K match rate.')
+        neg_advice_list.append(f'You inputed that your 401K interest rate is {user_assets.interest_401K_match} percent. Most 401K offer more then 3% matching. This means if you input 3% of your pay check to 401K, your employer will also match up to 3 percent into your 401K. As result you will have 6% each month go into your 401K. You should seek to see if your employer as better 401K plans or possible seek for another job where the other employer as a higher 401K match rate.')
     else:
-        pro_advice_list.append('Your 401K match is within the normal range of 3 to 5 percent match rate. You should always seek to max your 401k match rate. For example, if your employer offers up to 5 percent match rate. You should invest at least 5 percent into 401K. Its free money that your employer is offering to give you for your retirment.')
+        pro_advice_list.append(f'You inputed that your 401K interest rate is {user_assets.interest_401K_match} percent. Your 401K match is within the normal range of 3 to 5 percent match rate. You should always seek to max your 401k match rate. For example, if your employer offers up to 5 percent match rate. You should invest at least 5 percent into 401K. Its free money that your employer is offering to give you for your retirment.')
 
     
     

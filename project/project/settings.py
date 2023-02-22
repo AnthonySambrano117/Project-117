@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'users',
     'finances',
     'crispy_forms',
-    'crispy_tailwind'
+    'crispy_bootstrap5',
+    # 'crispy_tailwind'
 ]
 
 MIDDLEWARE = [
@@ -127,8 +128,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+# CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
-
-CRISPY_TEMPLATE_PACK = "tailwind"
+# CRISPY_TEMPLATE_PACK = "tailwind"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'

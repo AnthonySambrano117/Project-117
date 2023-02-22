@@ -1,21 +1,27 @@
 {% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
 {% block content  %}
-<h3>Profile</h3>
-<h1>Expense</h1>
-<h1>Welcome <cap>{{ request.user.username }}</cap></h1>
-{% comment %} {% for expenses in users_expenses %} {% endcomment %}
-<h1>Your Assets</h1>
-<h2>{{ total_Assets }}</h2>
 
+{% comment %} {% for expenses in users_expenses %} {% endcomment %}
+
+
+<h1>{{ request.user.username }} Your Assets</h1>
+
+<h2>{{ total_Assets }}</h2>
+<ul>
 {% for postive in feedback.positive %}
-<p>{{postive}}<p>
+<li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">{{postive}}</li>
+</ul>
 {% endfor %}
 
 
-<h1> Your Expense</h1>
+<h1>{{ request.user.username }} Your Expense</h1>
 <h2>{{ total_expenses }}</h2>
 {% for neg in feedback.negative%}
-<p>{{neg}}</p>
+<ul>
+<li class="list-group-item px-3 border-0 rounded-3 list-group-item-danger mb-2">{{neg}}</li>
+</ul>
+
 {% comment %} {% if post.image %}
 <img src="{{post.image.url}}" alt="">
 {% endif %} {% endcomment %}
@@ -25,13 +31,11 @@
 {% endfor %}
 
 
+{% comment %} Bar Graph Display {% endcomment %}
+<canvas id="horizontalBar"></canvas>
+<canvas id="pieChart"></canvas>
 
-{% comment %} users_expenses': users_expenses[0],
-        'total_expense': users_expenses[0].total_expenses {% endcomment %}
 
-{% comment %} <P>{{ users_expenses.as_p }}</p> {% endcomment %}
-{% comment %} {% endfor %} {% endcomment %}
-{% comment %} {% context %} {% endcomment %}
 {% endblock content %}
 
 

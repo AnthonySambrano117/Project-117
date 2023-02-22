@@ -5,7 +5,7 @@ from django import forms
 
 
 class BaseForm(forms.Form):
-    username = forms.CharField(max_length=32, min_length=3, label='Username', 
+    username = forms.CharField(max_length=32, min_length=3, 
                     widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder':'Password'}), min_length=8, max_length=32)
@@ -21,6 +21,8 @@ class RegistrationForm(BaseForm):
 #         fields=['username', 'password', 'email']
 #         # exlude=['username']
 class MonthlyExpenseForm(forms.Form):
+
+    
     rent_or_mortgage_payment=forms.IntegerField()
     car_payment =forms.IntegerField()
     # mortgage_bill=forms.IntegerField()
@@ -34,11 +36,16 @@ class MonthlyExpenseForm(forms.Form):
     miscellaneous=forms.IntegerField()
 
 class AssetsForm(forms.Form):
+    select_choices=(
+        (1, 'Yes'),
+        (2, 'No'),
+    )
+
     monthly_income=forms.IntegerField()
     amount_in_savings=forms.IntegerField()
     interest_rate_on_savings_account=forms.IntegerField()
     amount_in_stocks=forms.IntegerField()
-    investing_in_401K=forms.CharField(max_length=3)
+    investing_in_401K=forms.ChoiceField(choices=select_choices)
     interest_401K_match=forms.IntegerField()
     monthly_amount_investing_in_roth=forms.IntegerField()
     # roth_amount=forms.IntegerField()
