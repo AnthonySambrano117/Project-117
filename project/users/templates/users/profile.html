@@ -5,22 +5,40 @@
 {% comment %} {% for expenses in users_expenses %} {% endcomment %}
 
 
-<h1>{{ request.user.username }} Your Assets</h1>
-
-<h2>{{ total_Assets }}</h2>
-<ul>
-{% for postive in feedback.positive %}
-<li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">{{postive}}</li>
-</ul>
-{% endfor %}
+<h2 class='text-center'>{{ feedback.total }}</h2>
 
 
-<h1>{{ request.user.username }} Your Expense</h1>
-<h2>{{ total_expenses }}</h2>
-{% for neg in feedback.negative%}
-<ul>
-<li class="list-group-item px-3 border-0 rounded-3 list-group-item-danger mb-2">{{neg}}</li>
-</ul>
+
+
+<div class="container text-center">
+    <div class="row align-items-start">
+      <div class="col">
+        <h2 class= 'h2'>Your Income</h2>
+        <h3>${{ total_Assets }}</h3>
+            <ul>
+            {% for postive in feedback.positive %}
+            <li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">{{postive}}</li>
+            </ul>
+            {% endfor %}
+      </div>
+      <div class="col">
+        <h2>Your Expense</h2>
+        <h3>${{ total_expenses }}</h3>
+            {% for neg in feedback.negative%}
+            <ul>
+            <li class="list-group-item px-3 border-0 rounded-3 list-group-item-danger mb-2">{{neg}}</li>
+            </ul>
+            {% endfor %}
+      </div>
+      {% comment %} <div class="col">
+        One of three columns
+      </div> {% endcomment %}
+    </div>
+  </div>
+
+
+
+
 
 {% comment %} {% if post.image %}
 <img src="{{post.image.url}}" alt="">
@@ -28,7 +46,7 @@
 {% comment %} <p>{{post.body}}</p>
 <p>{{post.user.username}}</p>
 <p>{{post.edited_date}}</p> {% endcomment %}
-{% endfor %}
+
 
 
 {% comment %} Bar Graph Display {% endcomment %}

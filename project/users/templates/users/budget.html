@@ -49,8 +49,8 @@
                                 <div class="tab-pane" role="tabpanel" id="step3">
                                     <h4 class="text-center">Input Your Expenses</h4>
                                 
-                                        {% csrf_token %}
-                                        {{ monthlyExpense|crispy}}
+                                        {% comment %} {% csrf_token %}
+                                        {{ monthlyExpense|crispy}} {% endcomment %}
                                     
                                     <ul class="list-inline pull-right">
                                         <li><button type="button" class="default-btn prev-step">Back</button></li>
