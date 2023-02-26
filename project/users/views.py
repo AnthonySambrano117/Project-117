@@ -102,7 +102,9 @@ def profile(request):
         'total_expenses': users_expenses[0].total_expenses,
         'users_assets': users_assets[0],
         'total_Assets': users_assets[0].total_Assets,
-        'feedback': feedback
+        'feedback': feedback,
+
+        # 'total': total
         # 'expensesTotal': expensesTotal
     }
     
@@ -115,24 +117,6 @@ def base(request):
     return render(request, "users/base.html")
 
 
-# def expencesTotal(request):
-#     BlogPost.objects.filter(
-#         user=request.user)
-
-# def expences(request):
-#     if ammount_cars>=(expencesTotal*.1):
-#         print('Your car payment is to high. Your car payment should be 10% percent of you budget')
-#         else: "You car payment is within budget"
-
-#     if gas>=(expenceTotal*.1):
-#         print('Your car payment is to high. Your car payment should be no more then 10% percent of you budget')
-
-#     if rent>=(expencesTotal*.3)
-#         print("Your rent is expense is high. Most advisers recommended 30% or lower of your monthly_income should go to housing")
-    
-
-
-
 
 def budget(request):
     expenses=MonthlyExpenseForm()
@@ -141,8 +125,6 @@ def budget(request):
     context={
         'monthlyExpense': expenses,
         'monthly_incomeform': monthly_incomeform,
-        # 'BudgetOut': BudgetReview
-
     }
     #   if request.method == "GET":
     #     form = RegistrationForm
@@ -180,7 +162,7 @@ def saveAssets(form, request):
     new_asset.amount_in_stocks=form.cleaned_data['amount_in_stocks']
     new_asset.investing_in_401K=form.cleaned_data['investing_in_401K']#done
     new_asset.interest_401K_match=form.cleaned_data['interest_401K_match']#done
-    new_asset.monthly_amount_investing_in_roth=form.cleaned_dat['monthly_amount_investing_in_roth']
+    new_asset.monthly_amount_investing_in_roth=form.cleaned_data['monthly_amount_investing_in_roth']
     # new_asset.roth_amount=form.cleaned_data['roth_amount']
     # new_asset.pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
     new_asset.user=request.user
@@ -210,6 +192,15 @@ def saveMonthlyExpenses(formTwo, request):
 def UserReview(user_expenses,user_assets):
     neg_advice_list=[]
     pro_advice_list=[]
+    total=''
+    print(total)
+    Over_all_budget=user_assets.total_Assets-user_expenses.total_expenses
+    if Over_all_budget<=0:
+        total=(f'Monthly spending is {Over_all_budget} and is in the negative')
+    else:
+        total=(f'Monthly spending is {Over_all_budget} and is in the postive')
+
+
     if user_expenses.car_payment>=(user_assets.monthly_income*.1):
         neg_advice_list.append('Your car payment is to high. Your car payment should be no more then 10% percent of you budget')
     else: 
@@ -259,38 +250,7 @@ def UserReview(user_expenses,user_assets):
 
     
     
-    return {'negative': neg_advice_list, 'positive': pro_advice_list}
+    return {'negative': neg_advice_list, 'positive': pro_advice_list, 'total': total}
     # return [neg_advice_list, pro_advice_list]
 
-    
 
-
-
-# def expencesTotal(request):
-#     BlogPost.objects.filter(
-#         user=request.user)
-
-# def expences(request):
-#     if ammount_cars>=(expencesTotal*.1):
-#         print('Your car payment is to high. Your car payment should be 10% percent of you budget')
-#         else: "You car payment is within budget"
-
-#     if gas>=(expenceTotal*.1):
-#         print('Your car payment is to high. Your car payment should be no more then 10% percent of you budget')
-
-#     if rent>=(expencesTotal*.3)
-#         print("Your rent is expense is high. Most advisers recommended 30% or lower of your monthly_income should go to housing")
-
-
-  
-    # print(f'great stuff{users_expenses}')
-    # for expenses in users_expenses:
-    #     print(expenses.car_payment )
-    # print(users_expenses[1].car_payment )
-
-
-
-    # def index(request):
-    # # Get all public posts and order by date created (newest first)
-    # posts = BlogPost.objects.all().order_by('-created_date')
-    # return render(request, 'blog/index.html', {"posts": posts})

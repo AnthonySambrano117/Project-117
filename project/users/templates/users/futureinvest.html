@@ -1,67 +1,17 @@
 {% extends 'users/base.html' %}
-
+{% load static %}
 
 
 
 {% block content  %}
-<h1>Future Investing Page</h1>
-<div class="row" id="news-container" />
-
-{% comment %} <p id="skills" class="h1 section-head">Skills</p>
-<div class="container text-center">
-    <div class="row">
-    <div class="col">
-        <div class="card h-100" style="width: 18rem;">
-        <img src="/images/python.webp" class="card-img-top" alt="Pic of Python">
-        <div class="card-body">
-            <p class="card-text ">Skills in Python</p>
-        </div>
-        </div>
-    </div>
-
-
-    <section id="2nd_Section">
-        <p class="h4 p-4">Latest News</p>
+<div class="futureinvestment-wrap">
+    {% comment %} <img src="{% static 'users/Market_Money.jpg' %}" alt="Pic of Money news" width='100%' > {% endcomment %}
+    <div class="futureinvestment-content">
+        <h2 class='text-center'>Future News Investing Page</h2>
+        <div class="row" id="news-container" />
         <div class="container text-center">
-          <div class="row">
-            <div class="col">
-              <div class="card" style="width: 18rem;">
-                <img src="https://i.ytimg.com/vi/YLlepTZi520/maxresdefault.jpg" class="card-img-top" alt="Pic of Reach Being Attacked">
-                <div class="card-body">
-                  <p class="card-text">Covenant Attack Reach! Millions of people have died. UNSC needs your help</p>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ721rgz7PTWTwaG15JHA
-                -LGe4IAmlNrQXndQ&usqp=CAU" class="card-img-top" alt="Picture of UNSC Weapon">
-                <div class="card-body">
-                  <p class="card-text">UNSC got a new weapon. This weapon can produce a blast! Introducing UNSC rocket launcher.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-  
-              <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhJJ2XFar53VByh-
-                u56LPDh1m6AaPtO_2qKg&usqp=CAU" class="card-img-top" alt="Picture of New Spartan Armor">
-                <div class="card-body">
-                  <p class="card-text">Spartans Just Got New Upgraded Armor, Mjolnir V. Are you worth to put it on?</p>
-                </div>
-              </div>
-             
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
-
-
-
-<div id="location"></div> {% endcomment %}
-<button type="button" id="generatenews">News Report!</button>
+        <button type="button" id="generatenews">News Report!</button>
+    </div>
+</div>
 
 {% endblock content %}

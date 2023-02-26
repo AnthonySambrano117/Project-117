@@ -5,7 +5,6 @@ console.log('hello', generateLocation)
 
 generateLocation.addEventListener("click", async function(){
     let newsData= await getnews()
-    console.log(newsData)
     let newsHtml = ''
     newsData?.forEach((newsArticle) => {
     newsHtml += `<div class="card" style="width: 18rem;">
@@ -19,8 +18,8 @@ generateLocation.addEventListener("click", async function(){
     
    
   })
-// const reducer = (accumulator, currentValue) => accumulator + personCardHtml(currentValue);
-// const personsHtml = people.reduce(reducer, '')
+
+
 const container = document.querySelector('#news-container')
 container.insertAdjacentHTML('beforeend', newsHtml)
     // renderdiv(weather)
@@ -42,30 +41,4 @@ function getnews(){
 }
 
 
-function renderdiv(weather){
-     // Adding to DOM
-    let unix_timestamp = weather.dt
-    let dateTime = new Date(unix_timestamp*1000)
-    let date= document.createElement('p')
-    date.textContent=`Date: ${dateTime}`
-    locationDiv.appendChild(date)
-
-    let city =document.createElement('p')
-    city.textContent=`City: ${weather.name}`
-    locationDiv.appendChild(city)
-
-    let sky =document.createElement('p')
-    sky.textContent=`Weather: ${weather.weather[0].main}: ${weather.weather[0].description}`
- 
-    
-    locationDiv.appendChild(sky)
-
-    let temp =document.createElement('p')
-    temp.textContent=`Tempature: ${weather.main.temp}`
-    locationDiv.appendChild(temp)
-
-    let icon=document.createElement('img')
-    icon.setAttribute('src', `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`)
-    locationDiv.appendChild(icon)
-}
 

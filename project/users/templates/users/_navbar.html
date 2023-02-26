@@ -1,6 +1,13 @@
-<nav class="navbar navbar-expand-lg bg-primary">
+{% load static %}
+<link rel="stylesheet" href="{% static 'users/style.css' %}">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand link-light" href=""><h1 class="Name">Moon Finances</h1></a>
+        <a class="navbar-brand" style='display:flex; align-items:center' href="#">
+            <img src="{% static 'users/small_logo_hands.png' %}" style='border-radius: 50%' width="40" height="40" class="d-inline-block align-top" alt="">
+            <h1 style='margin-bottom:0; margin-left: 8px;'>Moon Finances</h1>
+        </a>
+
+        <a class="navbar-brand link-light" href=""><h1 class="Name"></h1></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
