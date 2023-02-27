@@ -20,7 +20,7 @@
                                     <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" aria-expanded="false"><span class="round-tab">2</span> <i>Expenses</i></a>
                                 </li>
                                 <li role="presentation" class="disabled">
-                                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"><span class="round-tab">3</span> <i>Additionaly Info</i></a>
+                                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"><span class="round-tab">3</span> <i>Additional Info</i></a>
                                 </li>
                             </ul>
                         </div>
@@ -43,14 +43,13 @@
                                         <li><button type="button" class="default-btn prev-step">Back</button></li>
                                         {% comment %} <li><button type="button" class="default-btn next-step skip-btn">Skip</button></li> {% endcomment %}
                                         <li><button type="button" class="default-btn next-step">Continue</button></li>
-                                        <li><input efault-btn next-step type="submit" value="Make Budget" name="Continue"></li>
                                     </ul>
                                 </div>
                                 <div class="tab-pane" role="tabpanel" id="step3">
-                                    <h4 class="text-center">Input Your Expenses</h4>
+                                    <h4 class="text-center">Additional Info</h4>
                                 
-                                        {% comment %} {% csrf_token %}
-                                        {{ monthlyExpense|crispy}} {% endcomment %}
+                                        {% csrf_token %}
+                                        {{ misc_finance_form|crispy}}
                                     
                                     <ul class="list-inline pull-right">
                                         <li><button type="button" class="default-btn prev-step">Back</button></li>

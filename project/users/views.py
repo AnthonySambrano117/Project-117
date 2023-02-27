@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, authenticate
-from .forms import RegistrationForm, MonthlyExpenseForm, AssetsForm, BudgetReviewForm, BaseForm as LoginForm
+from .forms import RegistrationForm, MonthlyExpenseForm, AssetsForm, MiscFinancesForm, BaseForm as LoginForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
 from django.contrib.auth.models import User
@@ -104,16 +104,12 @@ def profile(request):
         'total_Assets': users_assets[0].total_Assets,
         'feedback': feedback,
 
-        # 'total': total
-        # 'expensesTotal': expensesTotal
     }
     
     return render(request, 'users/profile.html', context)
 
 def base(request):
-    # context= {
-    #     form:'forms'
-    # }
+   
     return render(request, "users/base.html")
 
 
@@ -121,13 +117,13 @@ def base(request):
 def budget(request):
     expenses=MonthlyExpenseForm()
     monthly_incomeform = AssetsForm()
-    # BudgetReview=BudgetReviewForm()
+    misc_finance_form = MiscFinancesForm()
     context={
         'monthlyExpense': expenses,
         'monthly_incomeform': monthly_incomeform,
+        'misc_finance_form': misc_finance_form,
     }
-    #   if request.method == "GET":
-    #     form = RegistrationForm
+   
     if request.method == "GET":
        form = monthly_incomeform
 
@@ -135,12 +131,13 @@ def budget(request):
     #     # Create a form instance and populate it with data from the request:
         form = AssetsForm(request.POST)
         formTwo = MonthlyExpenseForm(request.POST)
+        miscForm = MiscFinancesForm(request.POST)
     #     # Check if the form is valid:
         
-        if form.is_valid() and formTwo.is_valid():
+        if form.is_valid() and formTwo.is_valid() and miscForm.is_valid():
      # Process the data in form.cleaned_data as required
-            saveAssets(form, request)
-            saveMonthlyExpenses(formTwo, request)
+            saveAssets(form, miscForm, request)
+            saveMonthlyExpenses(formTwo, miscForm, request)
 
     
         return redirect('profile')
@@ -152,17 +149,17 @@ def futureInvest(request):
     return render(request, 'users/futureinvest.html')
 
 
-def saveAssets(form, request):
+def saveAssets(form, miscForm, request):
 
     # Create a new assent object and save to the database
     new_asset=Assets()
     new_asset.monthly_income=form.cleaned_data['monthly_income']
     new_asset.amount_in_savings=form.cleaned_data['amount_in_savings']
-    new_asset.interest_rate_on_savings_account=form.cleaned_data['interest_rate_on_savings_account'] #done
+    new_asset.interest_rate_on_savings_account=miscForm.cleaned_data['interest_rate_on_savings_account'] #done
     new_asset.amount_in_stocks=form.cleaned_data['amount_in_stocks']
-    new_asset.investing_in_401K=form.cleaned_data['investing_in_401K']#done
-    new_asset.interest_401K_match=form.cleaned_data['interest_401K_match']#done
-    new_asset.monthly_amount_investing_in_roth=form.cleaned_data['monthly_amount_investing_in_roth']
+    new_asset.investing_in_401K=miscForm.cleaned_data['investing_in_401K']#done
+    new_asset.interest_401K_match=miscForm.cleaned_data['interest_401K_match']#done
+    new_asset.monthly_amount_investing_in_roth=miscForm.cleaned_data['monthly_amount_investing_in_roth']
     # new_asset.roth_amount=form.cleaned_data['roth_amount']
     # new_asset.pass_miscellaneous=form.cleaned_data['pass_miscellaneous']
     new_asset.user=request.user
@@ -170,12 +167,12 @@ def saveAssets(form, request):
     new_asset.total_Assets=total_Assets
     new_asset.save()
 
-def saveMonthlyExpenses(formTwo, request):
+def saveMonthlyExpenses(formTwo, miscForm, request):
     new_expense=MonthlyExpenseModel()
     new_expense.car_payment=formTwo.cleaned_data['car_payment'] #done
     new_expense.rent_or_mortgage_payment=formTwo.cleaned_data['rent_or_mortgage_payment'] #done
     # new_expense.mortgage_bill=formTwo.cleaned_data['mortgage_bill']
-    new_expense.mortgage_interest_rate=formTwo.cleaned_data['mortgage_interest_rate'] #done
+    new_expense.mortgage_interest_rate=miscForm.cleaned_data['mortgage_interest_rate'] #done
     new_expense.groceries=formTwo.cleaned_data['groceries'] 
     new_expense.dining_out=formTwo.cleaned_data['dining_out']
     new_expense.gas=formTwo.cleaned_data['gas'] #done
