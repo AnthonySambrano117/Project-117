@@ -2,6 +2,10 @@
     flex-wrap: 10;
 }
 
+nav a:hover {
+    color: lightsteelblue;
+}
+
 .futureinvestment-wrap {
     position: relative;
   }
