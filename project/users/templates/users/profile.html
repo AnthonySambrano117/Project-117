@@ -13,8 +13,8 @@
 <div class="container text-center">
     <div class="row align-items-start">
       <div class="col">
-        <h2 class= 'h2'>Your Income</h2>
-        <h3>${{ total_Assets }}</h3>
+        <h2 class= 'h2'>Monthly Income</h2>
+        <h3>${{ monthly_income }}</h3>
             <ul>
             {% for postive in feedback.positive %}
             <li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">{{postive}}</li>
@@ -22,7 +22,7 @@
             {% endfor %}
       </div>
       <div class="col">
-        <h2>Your Expense</h2>
+        <h2>Monthly Expenses</h2>
         <h3>${{ total_expenses }}</h3>
             {% for neg in feedback.negative%}
             <ul>
