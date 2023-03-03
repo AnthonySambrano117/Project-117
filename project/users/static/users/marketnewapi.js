@@ -11,7 +11,7 @@ async function showArticles(){
             <div class="card-body">
             <h5 class="card-title">${newsArticle.title}</h5>
             <p class=""card-text">"${newsArticle.snippet}"</p>
-            <a href="${newsArticle.url}" class="btn btn-primary">Read Me Two</a>
+            <a href="${newsArticle.url}" class="btn btn-primary">Learn More</a>
             </div>
         </div>
     </div>`
